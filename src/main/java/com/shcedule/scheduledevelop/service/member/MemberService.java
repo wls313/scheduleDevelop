@@ -48,4 +48,11 @@ public class MemberService {
         member.updateMember(memberName,email);
 
     }
+
+    public void deleteMember(String memberId) {
+        Member member = memberRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
+
+        memberRepository.delete(member);
+    }
 }
