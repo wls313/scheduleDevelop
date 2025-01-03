@@ -5,6 +5,7 @@ import com.shcedule.scheduledevelop.dto.member.MemberDto;
 import com.shcedule.scheduledevelop.dto.member.MemberRequestDto;
 import com.shcedule.scheduledevelop.dto.member.MemberResponseDto;
 import com.shcedule.scheduledevelop.repository.member.MemberRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,15 @@ public class MemberService {
                 .stream()
                 .map(MemberResponseDto::toDto)
                 .toList();
+
+    }
+
+    @Transactional
+    public void updateMember(String memberId,String memberName,String email) {
+        Member member = memberRepository.findByMemberId(memberId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
+
+        member.updateMember(memberName,email);
 
     }
 }

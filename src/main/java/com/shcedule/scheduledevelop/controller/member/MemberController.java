@@ -3,6 +3,7 @@ package com.shcedule.scheduledevelop.controller.member;
 import com.shcedule.scheduledevelop.dto.member.MemberDto;
 import com.shcedule.scheduledevelop.dto.member.MemberRequestDto;
 import com.shcedule.scheduledevelop.dto.member.MemberResponseDto;
+import com.shcedule.scheduledevelop.dto.member.MemberUpdateRequestDto;
 import com.shcedule.scheduledevelop.service.member.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,12 @@ public class MemberController {
         List<MemberResponseDto> memberResponseDtoList = memberService.findAll();
 
         return new ResponseEntity<>(memberResponseDtoList,HttpStatus.OK);
+    }
+
+    @PatchMapping("/{memberId}")
+    public ResponseEntity<MemberResponseDto> updateMember (@PathVariable String memberId ,@RequestBody MemberUpdateRequestDto requestDto){
+        memberService.updateMember(memberId,requestDto.memberName(),requestDto.email());
+
+    return new ResponseEntity<>(HttpStatus.OK);
     }
 }
