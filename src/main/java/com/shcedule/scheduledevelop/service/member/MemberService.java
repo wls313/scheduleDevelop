@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -26,5 +28,14 @@ public class MemberService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
 
         return new MemberResponseDto(member.getMemberName(),member.getEmail());
+    }
+
+
+    public List<MemberResponseDto> findAll() {
+        return memberRepository.findAll()
+                .stream()
+                .map(MemberResponseDto::toDto)
+                .toList();
+
     }
 }

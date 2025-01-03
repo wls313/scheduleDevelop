@@ -1,14 +1,10 @@
 package com.shcedule.scheduledevelop.dto.member;
 
-import lombok.Getter;
-@Getter
-public class MemberResponseDto {
+import com.shcedule.scheduledevelop.common.entity.Member;
 
-    private final String memberName;
-    private final String email;
+public record MemberResponseDto(String memberName, String email) {
 
-    public MemberResponseDto(String memberName, String email) {
-        this.memberName = memberName;
-        this.email = email;
+    public static MemberResponseDto toDto(Member member) {
+        return new MemberResponseDto(member.getMemberName(), member.getEmail());
     }
 }
