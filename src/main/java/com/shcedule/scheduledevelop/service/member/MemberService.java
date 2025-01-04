@@ -45,8 +45,13 @@ public class MemberService {
         Member member = memberRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
 
-        member.updateMember(memberName,email);
+        if(memberName != null && !memberName.isEmpty()){
+            member.updateMeberName(memberName);
+        }
 
+        if(email != null && !email.isEmpty()){
+            member.updateEmail(email);
+        }
     }
 
     public void deleteMember(String memberId) {
