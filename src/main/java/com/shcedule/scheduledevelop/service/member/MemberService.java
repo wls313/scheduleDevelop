@@ -46,7 +46,7 @@ public class MemberService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
 
         if(memberName != null && !memberName.isEmpty()){
-            member.updateMeberName(memberName);
+            member.updateMemberName(memberName);
         }
 
         if(email != null && !email.isEmpty()){
