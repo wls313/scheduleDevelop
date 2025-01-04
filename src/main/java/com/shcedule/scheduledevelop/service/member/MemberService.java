@@ -1,9 +1,9 @@
 package com.shcedule.scheduledevelop.service.member;
 
 import com.shcedule.scheduledevelop.common.entity.Member;
-import com.shcedule.scheduledevelop.dto.member.MemberDto;
-import com.shcedule.scheduledevelop.dto.member.MemberRequestDto;
-import com.shcedule.scheduledevelop.dto.member.MemberResponseDto;
+import com.shcedule.scheduledevelop.dto.member.CRD.MemberDto;
+import com.shcedule.scheduledevelop.dto.member.CRD.MemberRequestDto;
+import com.shcedule.scheduledevelop.dto.member.CRD.MemberResponseDto;
 import com.shcedule.scheduledevelop.repository.member.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

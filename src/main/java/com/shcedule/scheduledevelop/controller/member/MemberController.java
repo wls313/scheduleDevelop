@@ -1,9 +1,9 @@
 package com.shcedule.scheduledevelop.controller.member;
 
-import com.shcedule.scheduledevelop.dto.member.MemberDto;
-import com.shcedule.scheduledevelop.dto.member.MemberRequestDto;
-import com.shcedule.scheduledevelop.dto.member.MemberResponseDto;
-import com.shcedule.scheduledevelop.dto.member.MemberUpdateRequestDto;
+import com.shcedule.scheduledevelop.dto.member.CRD.MemberDto;
+import com.shcedule.scheduledevelop.dto.member.CRD.MemberRequestDto;
+import com.shcedule.scheduledevelop.dto.member.CRD.MemberResponseDto;
+import com.shcedule.scheduledevelop.dto.member.update.MemberUpdateRequestDto;
 import com.shcedule.scheduledevelop.service.member.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

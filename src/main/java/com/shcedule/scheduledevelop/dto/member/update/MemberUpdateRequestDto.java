@@ -1,4 +1,4 @@
-package com.shcedule.scheduledevelop.dto.member;
+package com.shcedule.scheduledevelop.dto.member.update;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
