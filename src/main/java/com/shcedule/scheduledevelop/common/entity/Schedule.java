@@ -40,4 +40,12 @@ public class Schedule extends BaseEntity{
         schedule.member = member;
         return schedule;
     }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateContents(String contents) {
+        this.contents = contents;
+    }
 }

@@ -31,12 +31,11 @@ public class ScheduleController {
         return new ResponseEntity<>(scheduleResponseDtoList,HttpStatus.OK);
     }
 
-//    @PatchMapping("/{id}")
-//    public ResponseEntity<ScheduleResponseDto> updateSchedule (@PathVariable Long id ,@RequestBody ScheduleRequestDto requestDto){
-//        scheduleService.updateSchedule(id,requestDto.title(),requestDto.contents());
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//
-//    }
-//    @DeleteMapping("/{id}")
+    @PatchMapping("/{id}")
+    public ResponseEntity<ScheduleResponseDto> updateSchedule (@PathVariable Long id ,@RequestBody ScheduleRequestDto requestDto){
+        ScheduleResponseDto scheduleResponseDto = scheduleService.updateSchedule(id, requestDto.title(), requestDto.contents());
+
+        return new ResponseEntity<>(scheduleResponseDto,HttpStatus.OK);
+
+    }
 }

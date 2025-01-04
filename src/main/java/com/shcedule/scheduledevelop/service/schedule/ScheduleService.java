@@ -2,12 +2,12 @@ package com.shcedule.scheduledevelop.service.schedule;
 
 import com.shcedule.scheduledevelop.common.entity.Member;
 import com.shcedule.scheduledevelop.common.entity.Schedule;
-import com.shcedule.scheduledevelop.dto.member.CRD.MemberResponseDto;
 import com.shcedule.scheduledevelop.dto.shcedule.CRD.ScheduleDto;
 import com.shcedule.scheduledevelop.dto.shcedule.CRD.ScheduleRequestDto;
 import com.shcedule.scheduledevelop.dto.shcedule.CRD.ScheduleResponseDto;
 import com.shcedule.scheduledevelop.repository.member.MemberRepository;
 import com.shcedule.scheduledevelop.repository.schedule.ScheduleRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -38,5 +38,21 @@ public class ScheduleService {
                 .stream()
                 .map(ScheduleResponseDto::toDto)
                 .toList();
+    }
+
+    @Transactional
+    public ScheduleResponseDto updateSchedule(Long id, String title,String contents) {
+        Schedule schedule = scheduleRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,id+"를 가진 스케쥴이 존재하지않습니다."));
+
+        if(title != null && !title.isEmpty()){
+            schedule.updateTitle(title);
+        }
+
+        if(contents != null && !contents.isEmpty()){
+            schedule.updateContents(contents);
+        }
+
+        return new ScheduleResponseDto(schedule.getTitle(), schedule.getWriter(), schedule.getContents());
     }
 }
