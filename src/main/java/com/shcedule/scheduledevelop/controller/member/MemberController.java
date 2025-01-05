@@ -19,7 +19,7 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<MemberDto> save(@Valid @RequestBody MemberRequestDto requestDto) {
         MemberDto response = memberService.createMember(requestDto);
 
