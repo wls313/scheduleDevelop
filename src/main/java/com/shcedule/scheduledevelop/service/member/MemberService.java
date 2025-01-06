@@ -1,15 +1,14 @@
 package com.shcedule.scheduledevelop.service.member;
 
 import com.shcedule.scheduledevelop.common.entity.Member;
+import com.shcedule.scheduledevelop.common.exception.MemberIdException;
 import com.shcedule.scheduledevelop.dto.member.CRD.MemberDto;
 import com.shcedule.scheduledevelop.dto.member.CRD.MemberRequestDto;
 import com.shcedule.scheduledevelop.dto.member.CRD.MemberResponseDto;
 import com.shcedule.scheduledevelop.repository.member.MemberRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class MemberService {
 
     public MemberResponseDto findByMemberId(String memberId){
         Member member = memberRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
+                .orElseThrow(() -> new MemberIdException(memberId));
 
         return new MemberResponseDto(member.getMemberName(),member.getEmail());
     }
@@ -44,7 +43,7 @@ public class MemberService {
     @Transactional
     public void updateMember(String memberId,String memberName,String email) {
         Member member = memberRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
+                .orElseThrow(() -> new MemberIdException(memberId));
 
             member.updateMember(memberName,email);
 
@@ -52,7 +51,7 @@ public class MemberService {
 
     public void deleteMember(String memberId) {
         Member member = memberRepository.findByMemberId(memberId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
+                .orElseThrow(() -> new MemberIdException(memberId));
 
         memberRepository.delete(member);
     }
