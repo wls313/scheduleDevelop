@@ -28,7 +28,8 @@ public class ScheduleService {
         Member member = memberRepository.findByMemberName(memberName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberName+"를 가진 사용자가 존재하지않습니다."));
 
-        Schedule schedule = scheduleRepository.save(Schedule.of(requestDto.title(),requestDto.writer(),requestDto.contents(),member));
+        Schedule schedule = Schedule.create(requestDto.title(),requestDto.writer(),requestDto.contents(),member);
+        scheduleRepository.save(schedule);
 
         return ScheduleDto.from(schedule);
     }
@@ -45,13 +46,7 @@ public class ScheduleService {
         Schedule schedule = scheduleRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,id+"를 가진 스케쥴이 존재하지않습니다."));
 
-        if(title != null && !title.isEmpty()){
-            schedule.updateTitle(title);
-        }
-
-        if(contents != null && !contents.isEmpty()){
-            schedule.updateContents(contents);
-        }
+        schedule.updateSchedule(title,contents);
 
         return new ScheduleResponseDto(schedule.getTitle(), schedule.getWriter(), schedule.getContents());
     }

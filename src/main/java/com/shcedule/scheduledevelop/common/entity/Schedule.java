@@ -31,7 +31,7 @@ public class Schedule extends BaseEntity{
     public Schedule(){
     }
 
-    public static Schedule of(String title, String writer, String contents, Member member){
+    public static Schedule create(String title, String writer, String contents, Member member){
         Schedule schedule = new Schedule();
 
         schedule.title = title;
@@ -41,11 +41,13 @@ public class Schedule extends BaseEntity{
         return schedule;
     }
 
-    public void updateTitle(String title) {
-        this.title = title;
+    public void updateSchedule(String title,String contents) {
+        if(title != null && !title.isEmpty()){
+            this.title = title;
+        }
+        if(contents != null && !contents.isEmpty()){
+            this.contents = contents;
+        }
     }
 
-    public void updateContents(String contents) {
-        this.contents = contents;
-    }
 }

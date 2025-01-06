@@ -19,7 +19,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public MemberDto createMember(MemberRequestDto requestDto) {
-        Member member = memberRepository.save(Member.of(requestDto.memberId(),requestDto.memberName(),requestDto.email(),requestDto.password()));
+        Member member = Member.create(requestDto.memberId(),requestDto.memberName(),requestDto.email(),requestDto.password());
+        memberRepository.save(member);
 
         return MemberDto.from(member);
     }
@@ -45,13 +46,8 @@ public class MemberService {
         Member member = memberRepository.findByMemberId(memberId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,memberId+"를 가진 사용자가 존재하지않습니다."));
 
-        if(memberName != null && !memberName.isEmpty()){
-            member.updateMemberName(memberName);
-        }
+            member.updateMember(memberName,email);
 
-        if(email != null && !email.isEmpty()){
-            member.updateEmail(email);
-        }
     }
 
     public void deleteMember(String memberId) {

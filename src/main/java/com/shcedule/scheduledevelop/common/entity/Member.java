@@ -28,7 +28,7 @@ public class Member extends BaseEntity{
 
     }
 
-    public static Member of(String memberId,String memberName, String email ,String password){
+    public static Member create(String memberId,String memberName, String email ,String password){
         Member member = new Member();
 
         member.memberId = memberId;
@@ -39,11 +39,13 @@ public class Member extends BaseEntity{
         return member;
     }
 
-    public void updateMemberName(String memberName) {
-        this.memberName = memberName;
-    }
+    public void updateMember(String memberName,String email) {
+        if(memberName != null && !memberName.isEmpty()){
+            this.memberName = memberName;
+        }
 
-    public void updateEmail(String email) {
-        this.email = email;
+        if(email != null && !email.isEmpty()){
+            this.email = email;
+        }
     }
 }
