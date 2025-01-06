@@ -1,5 +1,6 @@
 package com.shcedule.scheduledevelop.service.member;
 
+import com.shcedule.scheduledevelop.common.config.PasswordEncoder;
 import com.shcedule.scheduledevelop.common.entity.Member;
 import com.shcedule.scheduledevelop.common.exception.MemberIdException;
 import com.shcedule.scheduledevelop.dto.member.CRD.MemberDto;
@@ -16,9 +17,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final PasswordEncoder encoder;
 
     public MemberDto createMember(MemberRequestDto requestDto) {
-        Member member = Member.create(requestDto.memberId(),requestDto.memberName(),requestDto.email(),requestDto.password());
+        Member member = Member.create(requestDto.memberId(),requestDto.memberName(),requestDto.email(),encoder.encode(requestDto.password()));
         memberRepository.save(member);
 
         return MemberDto.from(member);
@@ -46,7 +48,6 @@ public class MemberService {
                 .orElseThrow(() -> new MemberIdException(memberId));
 
             member.updateMember(memberName,email);
-
     }
 
     public void deleteMember(String memberId) {

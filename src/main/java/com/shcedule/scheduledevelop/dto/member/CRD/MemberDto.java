@@ -8,7 +8,6 @@ public record MemberDto (
         String MemberId,
         String MemberName,
         String email,
-        String password,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ){
@@ -17,7 +16,6 @@ public record MemberDto (
                 member.getMemberId(),
                 member.getMemberName(),
                 member.getEmail(),
-                member.getPassword(),
                 member.getCreateAt(),
                 member.getUpdatedAt()
         );
